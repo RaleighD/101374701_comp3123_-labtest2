@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from './components/SearchBar';
 import WeatherDisplay from './components/WeatherDisplay';
 import './App.css';
-import Forecast from "./components/Forecast";
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState([]);
+  const [locationData, setLocationData] = useState(null);
 
     const showPlaceholderData = (position) => {
         const lat = position.coords.latitude;
@@ -30,23 +30,9 @@ function App() {
         console.warn(`ERROR(${error.code}): ${error.message}`);
     };
 
-    const transformForecastData = (dailyData) => {
-        const { time, temperature_2m_max, weathercode } = dailyData;
-        return time.map((date, index) => {
-            return {
-                date,
-                temperatureMax: temperature_2m_max[index],
-                weatherCode: weathercode[index]
-            };
-        });
-    };
-
-
-
-
     const fetchWeatherData = async (searchTerm) => {
         const [lat, lon] = searchTerm.split(',').map(coord => parseFloat(coord.trim()));
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max&timezone=auto&current_weather=true`;
 
 
         try {
@@ -55,37 +41,24 @@ function App() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
+            setLocationData(data)
             setWeatherData(data.current_weather);
+            setForecastData(data.daily.temperature_2m_max.slice(0, 5));
         } catch (error) {
             console.error("Error fetching weather data:", error);
             // Handle the error state appropriately
         }
     };
 
-    const fetchForecastData = async (searchTerm) => {
-        const [lat, lon] = searchTerm.split(',').map(coord => parseFloat(coord.trim()));
-        const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,weathercode&timezone=auto`;
 
-        try {
-            const response = await fetch(forecastUrl);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            const formattedData = transformForecastData(data.daily);
-            setForecastData(formattedData); // Use transformed data
-            console.log(forecastData); // Add this line in your App component to check the state
 
-        } catch (error) {
-            console.error("Error fetching forecast data:", error);
-        }
-    };
+
 
   return (
       <div className="App">
         <SearchBar onSearch={fetchWeatherData} />
-        <WeatherDisplay weatherData={weatherData}/>
-          <Forecast forecastData={forecastData} />
+          <WeatherDisplay weatherData={weatherData} forecastData={forecastData} locationData={locationData} />
+          />
       </div>
 
 

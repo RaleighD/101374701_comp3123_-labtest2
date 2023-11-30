@@ -1,15 +1,32 @@
 .weather-display {
-    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    max-width: 600px;
+    width: 100%;
 }
 
-.weather-info {
-    background-color: #e7f7ff;
-    padding: 15px;
-    border-radius: 10px;
+.current-weather, .forecast {
+    margin-bottom: 20px;
+}
+
+.location, .temperature, .wind-speed, .wind-direction {
     margin: 10px 0;
 }
 
-.weather-info p {
-    margin: 5px 0;
-    font-size: 1.1em;
+.forecast-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
+
+.forecast-day {
+    background: #e7e7e7;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+/* Add additional styling as needed */
