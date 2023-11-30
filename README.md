@@ -15,3 +15,5 @@ Below we can see different screen shots of the different icons generated to show
 Here are is the JSON returned by the API call to Open Metero, a free weather API service. 
 
 <img width="883" alt="Screenshot 2023-11-30 at 5 51 10 PM" src="https://github.com/RaleighD/101374701_comp3123_-labtest2/assets/95951774/758749a7-39a9-4b58-a4d5-ff2ddbe8bb29">
+
+Challenges faced by this lab test were mostly learning my way around styles in React in addition to the time constraints. 
