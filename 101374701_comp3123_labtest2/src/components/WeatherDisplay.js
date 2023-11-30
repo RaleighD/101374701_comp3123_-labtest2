@@ -4,21 +4,21 @@ import './WeatherDisplay.css';
 function getWeatherIcon(code) {
     switch (code) {
         case 0:
-            return 'sunny.png'; // Icon for clear sky
+            return 'sunny.png';
 
         case 1:
         case 2:
         case 3:
-            return '/cloudy.png'; // Icon for mainly clear, partly cloudy, and overcast
+            return '/cloudy.png';
 
         case 45:
         case 48:
-            return 'fog.png'; // Icon for fog and depositing rime fog
+            return 'fog.png';
 
         case 51:
         case 53:
         case 55:
-            return 'drizzler.png'; // Icon for light, moderate, and dense drizzle
+            return 'drizzler.png';
 
         case 56:
         case 57:

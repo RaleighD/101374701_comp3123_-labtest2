@@ -12,15 +12,13 @@ function App() {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
 
-        // Here you can fetch real weather data or use placeholder data
-        // For placeholder, we'll create a mock object
         const placeholderData = {
-            temperature: 20, // Example data
+            temperature: 20,
             wind_speed: 5,
             weather_code: 800,
             lat: lat,
             lon: lon,
-            isPlaceholder: true // You can use this flag to indicate placeholder data
+            isPlaceholder: true
         };
 
         setWeatherData(placeholderData);
@@ -46,7 +44,6 @@ function App() {
             setForecastData(data.daily.temperature_2m_max.slice(0, 5));
         } catch (error) {
             console.error("Error fetching weather data:", error);
-            // Handle the error state appropriately
         }
     };
 
