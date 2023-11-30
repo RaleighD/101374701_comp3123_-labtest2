@@ -1,15 +1,79 @@
 import React from 'react';
 import './WeatherDisplay.css';
 
-function WeatherDisplay({ weatherData, forecastData, locationData }) {
+function getWeatherIcon(code) {
+    switch (code) {
+        case 0:
+            return 'sunny.png'; // Icon for clear sky
+
+        case 1:
+        case 2:
+        case 3:
+            return '/cloudy.png'; // Icon for mainly clear, partly cloudy, and overcast
+
+        case 45:
+        case 48:
+            return 'fog.png'; // Icon for fog and depositing rime fog
+
+        case 51:
+        case 53:
+        case 55:
+            return 'drizzler.png'; // Icon for light, moderate, and dense drizzle
+
+        case 56:
+        case 57:
+            return 'freezing-drizzle.png';
+
+        case 61:
+        case 63:
+        case 65:
+            return 'rain.png';
+
+        case 66:
+        case 67:
+            return 'freezing-rain.jpeg';
+
+        case 71:
+        case 73:
+        case 75:
+            return 'snow.png';
+
+        case 77:
+            return 'snow-grains.png';
+
+        case 80:
+        case 81:
+        case 82:
+            return 'rain-showers.png';
+
+        case 85:
+        case 86:
+            return 'snow-showers.png';
+
+        case 95:
+            return 'thunderstorm.png';
+
+        case 96:
+        case 99:
+            return 'thunderstorm-hail.png';
+
+        default:
+            return 'default.png';
+    }
+}
+
+
+function WeatherDisplay({weatherData, forecastData, locationData }) {
     return (
         <div className="weather-display">
             {weatherData && (
                 <div className="current-weather">
+                    <img className="image-container" src={getWeatherIcon(weatherData.weathercode)} alt="Weather Icon" />
                     <p className="location">Current Weather for Longitude: {locationData.longitude}, Latitude: {locationData.latitude}</p>
                     <p className="temperature">Temperature: {weatherData.temperature}°C</p>
                     <p className="wind-speed">Wind Speed: {weatherData.windspeed} km/h</p>
                     <p className="wind-direction">Wind Direction: {weatherData.winddirection}°</p>
+                    <p className="wind-direction">Weather Code: {weatherData.weathercode}</p>
                 </div>
             )}
 

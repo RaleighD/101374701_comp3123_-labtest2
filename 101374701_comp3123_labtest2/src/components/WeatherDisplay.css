@@ -8,6 +8,13 @@
     width: 100%;
 }
 
+.image-container {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+}
+
 .current-weather, .forecast {
     margin-bottom: 20px;
 }

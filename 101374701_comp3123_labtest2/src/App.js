@@ -53,7 +53,6 @@ function App() {
 
 
 
-
   return (
       <div className="App">
         <SearchBar onSearch={fetchWeatherData} />
